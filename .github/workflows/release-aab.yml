@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -68,7 +68,7 @@ jobs:
             --dart-define=ADMOB_BANNER_ANDROID="$BANNER_ID" \
             --dart-define=ADMOB_INTERSTITIAL_ANDROID="$INTERSTITIAL_ID"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: little-animals-aab
           path: build/app/outputs/bundle/release/app-release.aab

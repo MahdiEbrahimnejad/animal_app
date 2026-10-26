@@ -1,5 +1,6 @@
 # Builds a test APK in the cloud on every push (no Android Studio needed).
-# Download it from: GitHub > Actions > latest run > Artifacts > little-animals-apk
+# Download it from: GitHub > Releases > "Test build (latest)" (direct .apk),
+# or GitHub > Actions > latest run > Artifacts > little-animals-apk
 name: Build APK
 
 on:
@@ -8,14 +9,17 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -39,8 +43,22 @@ jobs:
       - name: Build APK
         run: flutter build apk --release --dart-define=USE_TEST_ADS=true
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: little-animals-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 14
+
+      # Keeps one "test-build" pre-release whose APK can be downloaded
+      # straight onto a phone. Not a Play Store release.
+      - name: Publish test APK
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk little-animals-test.apk
+          gh release view test-build >/dev/null 2>&1 || \
+            gh release create test-build --prerelease \
+              --title "Test build (latest)" \
+              --notes "Latest test APK from the main branch. Shows Google test ads only."
+          gh release upload test-build little-animals-test.apk --clobber
