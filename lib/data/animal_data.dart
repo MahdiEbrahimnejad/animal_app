@@ -1,0 +1,207 @@
+import '../models/animal.dart';
+import '../models/animal_category.dart';
+
+/// Static content for version 1.
+///
+/// To add an animal: append one record here and drop its image/audio files
+/// into `assets/` following the naming convention described on [Animal].
+/// The order of this list is the learning order.
+const List<Animal> animalData = [
+  Animal(
+    id: 'dog',
+    category: AnimalCategory.pets,
+    emoji: '🐶',
+    names: {'fa': 'سگ', 'en': 'Dog'},
+    soundWords: {'fa': 'هاپ هاپ', 'en': 'Woof woof'},
+  ),
+  Animal(
+    id: 'cat',
+    category: AnimalCategory.pets,
+    emoji: '🐱',
+    names: {'fa': 'گربه', 'en': 'Cat'},
+    soundWords: {'fa': 'میو میو', 'en': 'Meow meow'},
+  ),
+  Animal(
+    id: 'rabbit',
+    category: AnimalCategory.pets,
+    emoji: '🐰',
+    names: {'fa': 'خرگوش', 'en': 'Rabbit'},
+  ),
+  Animal(
+    id: 'cow',
+    category: AnimalCategory.farm,
+    emoji: '🐮',
+    names: {'fa': 'گاو', 'en': 'Cow'},
+    soundWords: {'fa': 'ماااا', 'en': 'Moo'},
+  ),
+  Animal(
+    id: 'sheep',
+    category: AnimalCategory.farm,
+    emoji: '🐑',
+    names: {'fa': 'گوسفند', 'en': 'Sheep'},
+    soundWords: {'fa': 'بع بع', 'en': 'Baa baa'},
+  ),
+  Animal(
+    id: 'horse',
+    category: AnimalCategory.farm,
+    emoji: '🐴',
+    names: {'fa': 'اسب', 'en': 'Horse'},
+    soundWords: {'fa': 'ایهیهی', 'en': 'Neigh'},
+  ),
+  Animal(
+    id: 'chicken',
+    category: AnimalCategory.farm,
+    emoji: '🐔',
+    names: {'fa': 'مرغ', 'en': 'Chicken'},
+    soundWords: {'fa': 'قد قد', 'en': 'Cluck cluck'},
+  ),
+  Animal(
+    id: 'chick',
+    category: AnimalCategory.farm,
+    emoji: '🐤',
+    names: {'fa': 'جوجه', 'en': 'Chick'},
+    soundWords: {'fa': 'جیک جیک', 'en': 'Cheep cheep'},
+  ),
+  Animal(
+    id: 'duck',
+    category: AnimalCategory.farm,
+    emoji: '🦆',
+    names: {'fa': 'اردک', 'en': 'Duck'},
+    soundWords: {'fa': 'کواک کواک', 'en': 'Quack quack'},
+  ),
+  Animal(
+    id: 'pig',
+    category: AnimalCategory.farm,
+    emoji: '🐷',
+    names: {'fa': 'خوک', 'en': 'Pig'},
+    soundWords: {'fa': 'خُرخُر', 'en': 'Oink oink'},
+  ),
+  Animal(
+    id: 'lion',
+    category: AnimalCategory.wild,
+    emoji: '🦁',
+    names: {'fa': 'شیر', 'en': 'Lion'},
+    soundWords: {'fa': 'غُرررر', 'en': 'Roar'},
+  ),
+  Animal(
+    id: 'tiger',
+    category: AnimalCategory.wild,
+    emoji: '🐯',
+    names: {'fa': 'ببر', 'en': 'Tiger'},
+    soundWords: {'fa': 'غُرررر', 'en': 'Roar'},
+  ),
+  Animal(
+    id: 'elephant',
+    category: AnimalCategory.wild,
+    emoji: '🐘',
+    names: {'fa': 'فیل', 'en': 'Elephant'},
+  ),
+  Animal(
+    id: 'giraffe',
+    category: AnimalCategory.wild,
+    emoji: '🦒',
+    names: {'fa': 'زرافه', 'en': 'Giraffe'},
+  ),
+  Animal(
+    id: 'monkey',
+    category: AnimalCategory.wild,
+    emoji: '🐵',
+    names: {'fa': 'میمون', 'en': 'Monkey'},
+    soundWords: {'fa': 'اوو او آ آ', 'en': 'Ooh ooh ah ah'},
+  ),
+  Animal(
+    id: 'bear',
+    category: AnimalCategory.wild,
+    emoji: '🐻',
+    names: {'fa': 'خرس', 'en': 'Bear'},
+    soundWords: {'fa': 'غُرررر', 'en': 'Grrr'},
+  ),
+  Animal(
+    id: 'fox',
+    category: AnimalCategory.wild,
+    emoji: '🦊',
+    names: {'fa': 'روباه', 'en': 'Fox'},
+  ),
+  Animal(
+    id: 'panda',
+    category: AnimalCategory.wild,
+    emoji: '🐼',
+    names: {'fa': 'پاندا', 'en': 'Panda'},
+  ),
+  Animal(
+    id: 'wolf',
+    category: AnimalCategory.wild,
+    emoji: '🐺',
+    names: {'fa': 'گرگ', 'en': 'Wolf'},
+    soundWords: {'fa': 'اووووو', 'en': 'Awoooo'},
+  ),
+  Animal(
+    id: 'zebra',
+    category: AnimalCategory.wild,
+    emoji: '🦓',
+    names: {'fa': 'گورخر', 'en': 'Zebra'},
+  ),
+  Animal(
+    id: 'frog',
+    category: AnimalCategory.wild,
+    emoji: '🐸',
+    names: {'fa': 'قورباغه', 'en': 'Frog'},
+    soundWords: {'fa': 'قور قور', 'en': 'Ribbit ribbit'},
+  ),
+  Animal(
+    id: 'turtle',
+    category: AnimalCategory.wild,
+    emoji: '🐢',
+    names: {'fa': 'لاک‌پشت', 'en': 'Turtle'},
+  ),
+  Animal(
+    id: 'snake',
+    category: AnimalCategory.wild,
+    emoji: '🐍',
+    names: {'fa': 'مار', 'en': 'Snake'},
+    soundWords: {'fa': 'فیسسس', 'en': 'Hiss'},
+  ),
+  Animal(
+    id: 'butterfly',
+    category: AnimalCategory.insects,
+    emoji: '🦋',
+    names: {'fa': 'پروانه', 'en': 'Butterfly'},
+  ),
+  Animal(
+    id: 'bee',
+    category: AnimalCategory.insects,
+    emoji: '🐝',
+    names: {'fa': 'زنبور', 'en': 'Bee'},
+    soundWords: {'fa': 'وززز', 'en': 'Buzz'},
+  ),
+  Animal(
+    id: 'ladybug',
+    category: AnimalCategory.insects,
+    emoji: '🐞',
+    names: {'fa': 'کفشدوزک', 'en': 'Ladybug'},
+  ),
+  Animal(
+    id: 'dolphin',
+    category: AnimalCategory.sea,
+    emoji: '🐬',
+    names: {'fa': 'دلفین', 'en': 'Dolphin'},
+  ),
+  Animal(
+    id: 'whale',
+    category: AnimalCategory.sea,
+    emoji: '🐋',
+    names: {'fa': 'نهنگ', 'en': 'Whale'},
+  ),
+  Animal(
+    id: 'shark',
+    category: AnimalCategory.sea,
+    emoji: '🦈',
+    names: {'fa': 'کوسه', 'en': 'Shark'},
+  ),
+  Animal(
+    id: 'octopus',
+    category: AnimalCategory.sea,
+    emoji: '🐙',
+    names: {'fa': 'اختاپوس', 'en': 'Octopus'},
+  ),
+];

@@ -1,0 +1,79 @@
+# Builds the signed Android App Bundle (.aab) for Google Play.
+# Run manually: GitHub > Actions > Release AAB > Run workflow.
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   ANDROID_KEYSTORE_BASE64   base64 of your upload keystore (.jks)
+#   ANDROID_KEYSTORE_PASSWORD
+#   ANDROID_KEY_ALIAS
+#   ANDROID_KEY_PASSWORD
+# Optional (without them the release build shows no ads):
+#   ADMOB_APP_ID, ADMOB_BANNER_ANDROID, ADMOB_INTERSTITIAL_ANDROID
+name: Release AAB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.8"
+          channel: stable
+          cache: true
+
+      - name: Check signing secrets
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE64 secret is missing. See README (Publishing)."
+            exit 1
+          fi
+
+      - name: Restore keystore
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          echo "$KEYSTORE" | base64 --decode > android/app/upload-keystore.jks
+          {
+            echo "storeFile=upload-keystore.jks"
+            echo "storePassword=$STORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > android/key.properties
+
+      - run: flutter pub get
+      - run: flutter test
+
+      - name: Build AAB
+        env:
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+          BANNER_ID: ${{ secrets.ADMOB_BANNER_ANDROID }}
+          INTERSTITIAL_ID: ${{ secrets.ADMOB_INTERSTITIAL_ANDROID }}
+        run: |
+          flutter build appbundle --release \
+            --dart-define=ADMOB_BANNER_ANDROID="$BANNER_ID" \
+            --dart-define=ADMOB_INTERSTITIAL_ANDROID="$INTERSTITIAL_ID"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: little-animals-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+      - name: Remove signing files
+        if: always()
+        run: rm -f android/app/upload-keystore.jks android/key.properties

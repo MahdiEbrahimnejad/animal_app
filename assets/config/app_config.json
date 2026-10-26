@@ -1,0 +1,13 @@
+{
+  "premiumProductId": "premium_unlock",
+  "privacyPolicyUrl": "",
+  "analyticsEnabled": false,
+  "ads": {
+    "adsEnabled": true,
+    "provider": "admob",
+    "bannerEnabled": true,
+    "interstitialEnabled": false,
+    "bannerDelaySeconds": 30,
+    "interstitialMinIntervalSeconds": 600
+  }
+}
